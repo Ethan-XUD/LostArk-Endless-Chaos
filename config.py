@@ -24,7 +24,7 @@
 from characters import characters
 
 config = {
-    "mainCharacter": 0,  # must be in between number 0 to len(characters) - 1 (0 is the first character)
+    "mainCharacter": 1,  # must be in between number 0 to len(characters) - 1 (0 is the first character)
     "GFN": True,  # set True for Geforce Now users
     "enableMultiCharacterMode": True,  # this is lit
     "enableLopang": True,  # NOTE: you need to setup bifrost locations properly for this, at very specific locations. Look up ^
@@ -38,7 +38,7 @@ config = {
     # ilvl-aor is the daily aura of resonance dungeon you only want to run TWICE per day
     # IMPORTANT: dungeon ilvl choices are only limited to 1475, 1445, 1370, 1110 for now. I will add more later when brel comes out
     "characters": characters,
-    "performance": False,  # set True for lower-end PCs
+    "performance": True,  # set True for lower-end PCs
     "interact": "g",  # change this if you have binded it to something else eg.mouse button
     "move": "left",  # or "right"
     "blink": "space",
@@ -46,8 +46,8 @@ config = {
     "awakening": "v",
     "healthPot": "f1",  # important to put your regen potion on this button
     "friends": "u",
-    "invisible": True,
-    "healthPotAtPercent": 0.35,  # health threshold to trigger potion
+    "invisible": False,
+    "healthPotAtPercent": 0.50,  # health threshold to trigger potion
     # "useAwakening": True, # not checking this for now
     # "useSpeciality1": True, # not checking this for now
     # "useSpeciality2": True, # not checking this for now
@@ -73,8 +73,8 @@ config = {
     "minimapCenterX": 1772,
     "minimapCenterY": 272,
     "timeLimit": 450000,  # to prevent unexpected amount of time spent in a chaos dungeon, a tiem limit is set here, will quit after this amount of seconds
-    "timeLimitAor": 720000,  # to prevent unexpected amount of time spent in a chaos dungeon, a tiem limit is set here, will quit after this amount of seconds
-    "blackScreenTimeLimit": 30000,  # if stuck in nothing for this amount of time, alt f4 game, restart and resume.
+    "timeLimitAor": 450000,  # to prevent unexpected amount of time spent in a chaos dungeon, a tiem limit is set here, will quit after this amount of seconds
+    "blackScreenTimeLimit": 40000,  # if stuck in nothing for this amount of time, alt f4 game, restart and resume.
     "delayedStart": 3000,
     "portalPause": 700,
     "healthCheckX": 690,

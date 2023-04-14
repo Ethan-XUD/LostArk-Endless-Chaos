@@ -46,12 +46,33 @@ def main():
     parser = argparse.ArgumentParser(description="Optional app description")
     parser.add_argument("--lunshua", action="store_true", help="A boolean switch")
     parser.add_argument("--buy", action="store_true", help="A boolean switch")
+    parser.add_argument("--lopang", action="store_true", help="A boolean switch")
     args = parser.parse_args()
+
+    print("current character: ", states["currentCharacter"])
+
+    if args.lopang:
+        states["multiCharacterMode"] = True
+        config["enableLopang"] = True
+        for i in range(len(config["characters"])):
+            states["multiCharacterModeState"].append(0)
+        print(
+            "lopang start, running full runs on characters: {}".format(
+                states["multiCharacterModeState"]
+            )
+        )
 
     if args.lunshua:
         states["multiCharacterMode"] = True
+        config["enableLopang"] = False
+        #states["multiCharacterModeState"] = [0, 0, 0, 0, 1, 1]
         for i in range(len(config["characters"])):
-            states["multiCharacterModeState"].append(2)
+            if i == 0:
+                states["multiCharacterModeState"].append(2)
+            elif i in [1, 2]:
+                states["multiCharacterModeState"].append(2)
+            else:
+                states["multiCharacterModeState"].append(1)
         print(
             "lunshua start, running full runs on characters: {}".format(
                 states["multiCharacterModeState"]
@@ -134,7 +155,7 @@ def main():
 
             # switch character
             if states["multiCharacterMode"]:
-                if sum(states["multiCharacterModeState"]) == 0:
+                if sum(states["multiCharacterModeState"]) == 0 and states["currentCharacter"] == len(config["characters"]) - 1:
                     # repair
                     if config["auraRepair"]:
                         doAuraRepair(True)
@@ -463,8 +484,10 @@ def enterChaos():
                 1475: [[1266, 307], [524, 505]],
                 1490: [[1266, 307], [524, 555]],
                 1520: [[1266, 307], [524, 605]],
+                1540: [[1266, 307], [524, 662]],
             }
             if states["multiCharacterMode"] or aor != None:
+                #_curr["ilvl-aor"]
                 mouseMoveTo(
                     x=chaosTabPosition[_curr["ilvl-aor"]][0][0],
                     y=chaosTabPosition[_curr["ilvl-aor"]][0][1],
@@ -1831,7 +1854,7 @@ def fightFloor2Boss():
         mouseMoveTo(x=states["moveToX"], y=states["moveToY"])
         sleep(80, 100)
         pydirectinput.press(config["awakening"])
-        if config["characters"][states["currentCharacter"]]["class"] == "summoner":
+        if config["characters"][states["currentCharacter"]]["class"] in ["scrapper", "bard"]:
             sleep(80, 100)
             pydirectinput.press(config["awakening"])
             sleep(80, 100)
@@ -2497,7 +2520,8 @@ def offlineCheck():
             inactive = pyautogui.screenshot()
             inactive.save("./debug/inactive_" + str(currentTime) + ".png")
             return True
-    if dc != None or ok != None or enterServer != None:
+    #or ok != None or enterServer != None
+    if dc != None:
         currentTime = int(time.time_ns() / 1000000)
         dc = pyautogui.screenshot()
         dc.save("./debug/dc_" + str(currentTime) + ".png")
@@ -2741,7 +2765,17 @@ def restartGame():
 def switchToCharacter(index):
     sleep(1500, 1600)
     print("switching to {}".format(index))
-    pydirectinput.press("esc")
+    while True:
+        print("Looking for switch character")
+        pydirectinput.press("esc")
+        sleep(3300, 3600)
+        switchCharacter = pyautogui.locateCenterOnScreen("./screenshots/switchcharacter.png",confidence=0.70,
+        region=(450, 400, 250, 500),)
+        if switchCharacter == None:
+            sleep(1500, 1600)
+        else:
+            break
+    #pydirectinput.press("esc")
     sleep(1500, 1600)
     mouseMoveTo(x=config["charSwitchX"], y=config["charSwitchY"])
     sleep(1500, 1600)
@@ -2845,18 +2879,13 @@ def doGuildDonation():
     sleep(300, 400)
     pydirectinput.keyUp("alt")
     sleep(4100, 5200)
-
-    ok = pyautogui.locateCenterOnScreen(
-        "./screenshots/ok.png", region=config["regions"]["center"], confidence=0.75
-    )
-
-    if ok != None:
-        x, y = ok
-        mouseMoveTo(x=x, y=y)
-        sleep(300, 400)
-        pydirectinput.click(x=x, y=y, button="left")
-        sleep(300, 400)
-        pydirectinput.click(x=x, y=y, button="left")
+    # if ok != None:
+    #     x, y = ok
+    #     mouseMoveTo(x=x, y=y)
+    #     sleep(300, 400)
+    #     pydirectinput.click(x=x, y=y, button="left")
+    #     sleep(300, 400)
+    #     pydirectinput.click(x=x, y=y, button="left")
     sleep(1500, 1600)
 
     mouseMoveTo(x=1431, y=843)
@@ -2906,7 +2935,8 @@ def doGuildDonation():
         )
 
         if canSupportResearch != None:
-            mouseMoveTo(x=848, y=520)
+            #848, 520
+            mouseMoveTo(x=810, y=540)
             sleep(500, 600)
             pydirectinput.click(button="left")
             sleep(500, 600)
@@ -3065,11 +3095,11 @@ def doLopang():
 def bifrostGoTo(option):
     print("bifrost to: {}".format(option))
     bifrostXY = [
-        [1343, 517],
-        [1343, 579],
-        [1343, 640],
-        [1343, 736],
-        [1343, 796],
+        [1123, 470], #517
+        [1123, 531], #579
+        [1123, 586], #640
+        [1123, 686], #736
+        [1123, 748], #796
     ]
     pydirectinput.keyDown("alt")
     sleep(300, 400)
@@ -3370,6 +3400,7 @@ def goInvisible():
     sleep(700, 800)
     pydirectinput.click(x=1836, y=448, button="left")
     sleep(500, 600)
+    pydirectinput.press("esc")
 
 
 if __name__ == "__main__":
