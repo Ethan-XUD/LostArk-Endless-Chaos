@@ -24,7 +24,7 @@
 from characters import characters
 
 config = {
-    "mainCharacter": 1,  # must be in between number 0 to len(characters) - 1 (0 is the first character)
+    "mainCharacter": 0,  # must be in between number 0 to len(characters) - 1 (0 is the first character)
     "GFN": True,  # set True for Geforce Now users
     "enableMultiCharacterMode": True,  # this is lit
     "enableLopang": True,  # NOTE: you need to setup bifrost locations properly for this, at very specific locations. Look up ^
@@ -46,7 +46,7 @@ config = {
     "awakening": "v",
     "healthPot": "f1",  # important to put your regen potion on this button
     "friends": "u",
-    "invisible": False,
+    "invisible": True,
     "healthPotAtPercent": 0.50,  # health threshold to trigger potion
     # "useAwakening": True, # not checking this for now
     # "useSpeciality1": True, # not checking this for now
