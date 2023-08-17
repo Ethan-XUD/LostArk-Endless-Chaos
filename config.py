@@ -38,7 +38,7 @@ config = {
     # ilvl-aor is the daily aura of resonance dungeon you only want to run TWICE per day
     # IMPORTANT: dungeon ilvl choices are only limited to 1475, 1445, 1370, 1110 for now. I will add more later when brel comes out
     "characters": characters,
-    "performance": True,  # set True for lower-end PCs
+    "performance": False,  # set True for lower-end PCs
     "interact": "g",  # change this if you have binded it to something else eg.mouse button
     "move": "left",  # or "right"
     "blink": "space",
