@@ -32,7 +32,7 @@ config = {
     "enableRapport": False,  # NOTE: you need to setup bifrost no3 infront of a rapport NPC
     "floor3Mode": False,  # only enable if you ONLY want to run infinite floor3 clearing
     # Setup your characters below:
-    # can setup UP TO 9 characters for daily chaos/lopang/guild stuff
+    # can setup UP TO 18(0 to 17) characters for daily chaos/lopang/guild stuff
     # however your main must be in character 0 to 5 (just for re-connect back after disconnection happens)
     # ilvl-endless is the dungeon which you want to run infinitely
     # ilvl-aor is the daily aura of resonance dungeon you only want to run TWICE per day
@@ -61,7 +61,7 @@ config = {
         "abilities": (625, 779, 300, 155),
         "leaveMenu": (0, 154, 250, 300),
         "buffs": (625, 780, 300, 60),
-        "center": (685, 280, 550, 420),
+        "center": (685, 280, 600, 420),
         "portal": (228, 230, 1370, 570),
     },
     "screenResolutionX": 1920,
@@ -73,7 +73,7 @@ config = {
     "minimapCenterX": 1772,
     "minimapCenterY": 272,
     "timeLimit": 450000,  # to prevent unexpected amount of time spent in a chaos dungeon, a tiem limit is set here, will quit after this amount of seconds
-    "timeLimitAor": 450000,  # to prevent unexpected amount of time spent in a chaos dungeon, a tiem limit is set here, will quit after this amount of seconds
+    "timeLimitAor": 720000,  # to prevent unexpected amount of time spent in a chaos dungeon, a tiem limit is set here, will quit after this amount of seconds
     "blackScreenTimeLimit": 40000,  # if stuck in nothing for this amount of time, alt f4 game, restart and resume.
     "delayedStart": 3000,
     "portalPause": 700,
@@ -99,6 +99,9 @@ config = {
         [760, 620],
         [960, 620],
         [1160, 620],
+        [760, 530],
+        [960, 530],
+        [1160, 530],
         [760, 620],
         [960, 620],
         [1160, 620],
